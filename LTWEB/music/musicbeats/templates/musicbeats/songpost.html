@@ -1,0 +1,28 @@
+{% extends 'musicbeats/base.html' %}
+{% block title %} All Songs {% endblock %}
+{% load static %}
+{% block body%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="padding-top: 3%;">
+
+            <img src="{{ song.image.url }}" alt="" height="250px" width="350px">
+        </div>
+        <div class="col-md-6 " style="padding-top: 5%; ">
+            <h2 style="font-weight: 550;padding-top: 6%;"> Title: {{ song.name }}</h2>
+            <h4 style="font-weight: 550; padding-top:2% ;">Category: {{ song.tags }}</h2>
+                <h4 style="font-weight: 550; padding-top:2% ;">Singer: {{ song.singer }}</h2>
+                    <audio controls style="padding-top: 2%;">
+                        <source src="{{song.song.url}}" type="audio/mp3">
+                    </audio>
+                    <div class="" style="padding-top: 2%;">
+                        <a href="/media/{{song.song}}" download> <button class="btn btn-outline-danger"> Dowload Song  </button></a>
+                        <a href="/media/{{song.song}}" download> <button class="btn btn-outline-danger"> Add to watch later  </button></a>
+
+                    </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
