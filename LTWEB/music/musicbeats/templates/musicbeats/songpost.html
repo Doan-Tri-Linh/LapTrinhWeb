@@ -3,6 +3,19 @@
 {% load static %}
 {% block body%}
 
+
+{% if message %}
+<script>
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '{{message}}',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    </script>
+{% endif %}
+
 <div class="container">
     <div class="row">
         <div class="col-md-6" style="padding-top: 3%;">
@@ -16,10 +29,18 @@
                     <audio controls style="padding-top: 2%;">
                         <source src="{{song.song.url}}" type="audio/mp3">
                     </audio>
-                    <div class="" style="padding-top: 2%;">
-                        <a href="/media/{{song.song}}" download> <button class="btn btn-outline-danger"> Dowload Song  </button></a>
-                        <a href="/media/{{song.song}}" download> <button class="btn btn-outline-danger"> Add to watch later  </button></a>
 
+                    <div class="row" style="padding-top: 2%;">
+                        <div class="row">
+                        <a download href="{{song.song.url}}" > <button class="btn btn-outline-danger"> Dowload Song  </button></a>
+
+                        <form action="/watchlater/" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="video_id" value="{{song.song_id}}">
+                        <button type="submit" class="btn btn-outline-danger"> Add to watch later  </button>
+                      
+                    </form>
+                    </div>
                     </div>
         </div>
     </div>
