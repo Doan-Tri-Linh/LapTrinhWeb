@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.deletion import CASCADE
 # Create your models here.
 
 class Song(models.Model):
@@ -18,3 +19,17 @@ class WatchLater(models.Model):
     watch_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video_id = models.CharField(max_length=1000,default="")
+
+
+class History(models.Model):
+    hist_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User,on_delete=CASCADE)
+    music_id = models.CharField(max_length=1000,default="")
+
+
+class Channel(models.Model):
+    channel_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=1000)
+    music = models.CharField(max_length=1000)
+    
+     

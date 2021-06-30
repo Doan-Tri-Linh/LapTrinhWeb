@@ -1,0 +1,35 @@
+{%extends 'musicbeats/base.html'%}
+{% block title%}Watch Later{% endblock %}
+
+{% block body %}
+    <h2 style="text-align: center; padding-top: 2; color: red ;"> Channel: {{ channel.name }} </h2>
+
+    
+<div class="container">
+
+
+    {% for i in song %}
+    <div class="card mb-3" style="max-width: 540px; padding-top: 3%;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ i.image.url }}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name }}</h5>
+                    <p class="card-text">{{ i.tags }}</p>
+                    {% if user.is_authenticated %}
+                    <form action="/history/" method="POST" > {% csrf_token %}
+                        <input type="hidden" name="music_id" value="{{ i.song_id }}">
+                    <a href="/songs/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song </button></a>
+                    </form>
+                    {% else %}
+                    <a href="/songs/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song </button></a>
+                    {% endif  %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
