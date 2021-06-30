@@ -92,5 +92,17 @@ def watchlater(request):
             return render(request,f'musicbeats/songpost.html',{'song':song,'message':messages})
             
 
-  
-      return render(request, "musicbeats/watchlater.html")
+      wl = WatchLater.objects.filter(user=request.user)
+      ids = []
+      for i in wl:
+            ids.append(i.video_id)
+
+      preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(ids)])
+      song = Song.objects.filter(song_id__in=ids).order_by(preserved)
+      
+      return render(request, "musicbeats/watchlater.html", {'song':song} )
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("/")
