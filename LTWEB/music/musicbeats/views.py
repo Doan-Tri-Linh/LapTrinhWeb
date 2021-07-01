@@ -1,36 +1,42 @@
+from os import name
 from django.core.checks import messages
 from django.shortcuts import render
-from . models import History, Song,WatchLater,Channel
+from . models import History, Song,WatchLater,Channel,Category
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
-from django.db.models import Case, When
+from django.db.models import Case, When, query
 from django.http import HttpResponse
 # Create your views here.
 
 
 def index(request):
-
+    category = Category.objects.all()
     song = Song.objects.all()
     context = {
+        'category':category,
         'song': song
     }
     return render(request, 'musicbeats/index.html', context)
 
 
 def songs(request):
+    category = Category.objects.all()
     song = Song.objects.all()
     context = {
-        'song': song
+        'song': song,
+        'category': category
     }
 
     return render(request, 'musicbeats/songs.html', context)
 
 
 def songpost(request, id):
+    category = Category.objects.all()
     song = Song.objects.filter(song_id=id).first()
     context = {
-        'song': song
+        'song': song,
+        'category':category,
     }
     return render(request, 'musicbeats/songpost.html', context)
 
@@ -61,7 +67,7 @@ def signup(request):
 
 
 def login(request):
-
+    
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -71,7 +77,7 @@ def login(request):
 
         return redirect("/")
 
-    return render(request, 'musicbeats/login.html',)
+    return render(request, 'musicbeats/login.html')
 
 
 def watchlater(request):
@@ -91,8 +97,9 @@ def watchlater(request):
                   watchlater.save()
                   messages = "Your video is succesfuly added"
             song = Song.objects.filter(song_id=video_id).first()
+            category = Category.objects.all()
             
-            return render(request,f'musicbeats/songpost.html',{'song':song,'message':messages})
+            return render(request,f'musicbeats/songpost.html',{'song':song,'message':messages,'category':category})
             
 
       wl = WatchLater.objects.filter(user=request.user)
@@ -102,8 +109,9 @@ def watchlater(request):
 
       preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(ids)])
       song = Song.objects.filter(song_id__in=ids).order_by(preserved)
+      category = Category.objects.all()
       
-      return render(request, "musicbeats/watchlater.html", {'song':song} )
+      return render(request, "musicbeats/watchlater.html", {'song':song,'category':category} )
 
 
 def logout_user(request):
@@ -126,35 +134,65 @@ def history(request):
 
     preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(ids)])
     song = Song.objects.filter(song_id__in=ids).order_by(preserved)
-    return render(request,'musicbeats/history.html',{'history':song})
+    category = Category.objects.all()
+    return render(request,'musicbeats/history.html',{'history':song,'category':category})
 
 def channel(request,channel):
     chan = Channel.objects.filter(name=channel).first()
     video_ids = str(chan.music).split(" ")[1:]
     preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(video_ids)])
-    song = Song.objects.filter(song_id__in=video_ids).order_by(preserved)    
+    song = Song.objects.filter(song_id__in=video_ids).order_by(preserved)  
+    category = Category.objects.all()  
 
-    return render(request,'musicbeats/channel.html',{'channel':chan,'song':song})
+    return render(request,'musicbeats/channel.html',{'channel':chan,'song':song,'category':category})
 
 
 def upload(request):
+    category = Category.objects.all()
+
     if request.method == "POST":
         name = request.POST['name']
         singer = request.POST['singer']
         tag = request.POST['tag']
         image = request.FILES['image']
+        category = request.POST['category']
 
         song1 = request.FILES['file']
-
-        song_model = Song(name=name, singer=singer, tags=tag, image=image, song=song1)
+        
+        song_model = Song(name=name, singer=singer, tags=tag, image=image, song=song1,category=1)
         song_model.save()
-
+        
+        print(song_model)
         music_id = song_model.song_id
         channel_find = Channel.objects.filter(name=str(request.user))
+      
         print(channel_find)
 
         for i in channel_find:
             i.music += f" {music_id}"
             i.save()
 
-    return render(request, "musicbeats/upload.html")
+    return render(request, "musicbeats/upload.html",{'category':category})
+
+def search(request):
+    category = Category.objects.all()
+    query = request.GET.get("query")
+    song = Song.objects.all()
+    qs = song.filter(name__icontains=query)
+
+
+    return render(request,'musicbeats/search.html',{'songs':qs,'query':query,'category':category})
+
+
+def category_music(request,id,slug):
+
+    category = Category.objects.all()
+    song = Song.objects.filter(category_id =id)
+   
+    context = {
+        'song':song,
+        'category':category,
+
+    }
+
+    return render(request,'musicbeats/category_music.html',context)
