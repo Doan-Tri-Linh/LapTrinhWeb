@@ -14,6 +14,8 @@
   <title>{% block title %} {% endblock %}</title>
 </head>
 
+
+
 <body>
   {% load static %}
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -63,7 +65,7 @@
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" onclick="logout()">Logout</a>
         <a class="dropdown-item" href="/c/{{ request.user }}">Your Chanel</a>
-        <a class="dropdown-item" href="/watchlater/">WatchLater</a>
+        <a class="dropdown-item" href="/watchlater/">Your Playlist</a>
         <a class="dropdown-item" href="/history/">History</a>
         <a class="dropdown-item" href="/upload/">Upload Music</a>
 

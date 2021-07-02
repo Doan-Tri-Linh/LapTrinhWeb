@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Song,WatchLater,History,Channel,Category
+from .models import Song, Song_channel,WatchLater,History,Channel,Category
 from mptt.admin import DraggableMPTTAdmin
 # Register your models here.
 
@@ -46,3 +46,4 @@ admin.site.register(Song),
 admin.site.register(WatchLater),
 admin.site.register(History),
 admin.site.register(Channel),
+admin.site.register(Song_channel),

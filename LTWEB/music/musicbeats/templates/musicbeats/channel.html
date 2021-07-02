@@ -1,14 +1,38 @@
-{%extends 'musicbeats/base.html'%}
-{% block title%}Watch Later{% endblock %}
+
+<head>
+  
+
+    <style type="text/css">
+
+        body{
+        background-image: url(https://thuthuatnhanh.com/wp-content/uploads/2019/11/hinh-nen-dien-thoai-dep-585x390.jpg);
+    }
+    </style>
+  
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="/media/images/soundmanagerv297a-20170601/script/soundmanager2.js"></script>
+    <title>{% block title %} Watch Channel  {% endblock %}</title>
+  </head>
+
+
+
 
 {% block body %}
     <h2 style="text-align: center; padding-top: 2; color: red ;"> Channel: {{ channel.name }} </h2>
 
-    
+<body>
 <div class="container">
 
 
-    {% for i in song %}
+    {% for i in song_channel  %}
     <div class="card mb-3" style="max-width: 540px; padding-top: 3%;">
         <div class="row g-0">
             <div class="col-md-4">
@@ -17,19 +41,15 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{ i.name }}</h5>
-                    <p class="card-text">{{ i.tags }}</p>
-                    {% if user.is_authenticated %}
-                    <form action="/history/" method="POST" > {% csrf_token %}
                         <input type="hidden" name="music_id" value="{{ i.song_id }}">
-                    <a href="/songs/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song </button></a>
-                    </form>
-                    {% else %}
-                    <a href="/songs/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song </button></a>
-                    {% endif  %}
-                </div>
+                    <a href="/song_channel/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song </button></a>
+                   
+        
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
 {% endblock %}
+
+</body>

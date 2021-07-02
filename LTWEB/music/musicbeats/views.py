@@ -1,7 +1,7 @@
 from os import name
 from django.core.checks import messages
 from django.shortcuts import render
-from . models import History, Song,WatchLater,Channel,Category
+from . models import History, Song, Song_channel,WatchLater,Channel,Category
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
@@ -137,29 +137,26 @@ def history(request):
     category = Category.objects.all()
     return render(request,'musicbeats/history.html',{'history':song,'category':category})
 
+
 def channel(request,channel):
     chan = Channel.objects.filter(name=channel).first()
     video_ids = str(chan.music).split(" ")[1:]
     preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(video_ids)])
-    song = Song.objects.filter(song_id__in=video_ids).order_by(preserved)  
-    category = Category.objects.all()  
+    song = Song_channel.objects.filter(song_id__in=video_ids).order_by(preserved)  
+ 
+    return render(request,'musicbeats/channel.html',{'channel':chan,'song_channel':song})
 
-    return render(request,'musicbeats/channel.html',{'channel':chan,'song':song,'category':category})
 
 
 def upload(request):
-    category = Category.objects.all()
-
     if request.method == "POST":
         name = request.POST['name']
         singer = request.POST['singer']
-        tag = request.POST['tag']
         image = request.FILES['image']
-        category = request.POST['category']
-
+     
         song1 = request.FILES['file']
         
-        song_model = Song(name=name, singer=singer, tags=tag, image=image, song=song1,category=1)
+        song_model = Song_channel(name=name, singer=singer, image=image, song=song1,)
         song_model.save()
         
         print(song_model)
@@ -172,7 +169,7 @@ def upload(request):
             i.music += f" {music_id}"
             i.save()
 
-    return render(request, "musicbeats/upload.html",{'category':category})
+    return render(request, "musicbeats/upload.html")
 
 def search(request):
     category = Category.objects.all()
@@ -196,3 +193,13 @@ def category_music(request,id,slug):
     }
 
     return render(request,'musicbeats/category_music.html',context)
+
+
+def songpost_channel(request, id):
+
+    song = Song_channel.objects.filter(song_id=id).first()
+    context = {
+        'song': song,    
+    }
+    return render(request, 'musicbeats/songpost_channel.html', context)
+

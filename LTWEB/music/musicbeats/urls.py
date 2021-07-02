@@ -16,5 +16,6 @@ urlpatterns = [
     path('upload/',views.upload,name="upload"),
     path('search/',views.search,name="search"),
     path('category/<int:id>/<slug:slug>', views.category_music, name='category_music'),
+    path('song_channel/<int:id>',views.songpost_channel, name="songpost_channel"),
 
 ]

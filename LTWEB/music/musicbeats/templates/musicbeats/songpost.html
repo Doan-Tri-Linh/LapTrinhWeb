@@ -12,8 +12,8 @@
         title: '{{message}}',
         showConfirmButton: false,
         timer: 1500
-      })
-    </script>
+    })
+</script>
 {% endif %}
 
 <div class="container">
@@ -32,15 +32,16 @@
 
                     <div class="row" style="padding-top: 2%;">
                         <div class="row">
-                        <a download href="{{song.song.url}}" > <button class="btn btn-outline-danger"> Dowload Song  </button></a>
+                            <a download href="{{song.song.url}}"> <button class="btn btn-outline-danger"> Dowload Song
+                                </button></a>
 
-                        <form action="/watchlater/" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="video_id" value="{{song.song_id}}">
-                        <button type="submit" class="btn btn-outline-danger"> Add to watch later  </button>
-                      
-                    </form>
-                    </div>
+                            <form action="/watchlater/" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="video_id" value="{{song.song_id}}">
+                                <button type="submit" class="btn btn-outline-danger"> Add to playlist </button>
+
+                            </form>
+                        </div>
                     </div>
         </div>
     </div>
