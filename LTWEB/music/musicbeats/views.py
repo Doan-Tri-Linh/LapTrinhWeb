@@ -12,10 +12,14 @@ from django.http import HttpResponse
 
 def index(request):
     category = Category.objects.all()
-    song = Song.objects.all()
+    song_trending = Song.objects.all().order_by('song_id')[:4]
+    song_today = Song.objects.all().order_by('-song_id')[:4]
+    song_for_you = Song.objects.all().order_by('?')[:4]
     context = {
         'category':category,
-        'song': song
+        'song_trending':song_trending,
+        'song_for_you':song_for_you,
+        'song_today':song_today
     }
     return render(request, 'musicbeats/index.html', context)
 

@@ -3,6 +3,13 @@
 {% block title%}MusicBeats{% endblock %}
 {% load static %}
 {% block body %}
+
+<style type="text/css">
+
+  body{
+  background-image: url(https://img2.thuthuatphanmem.vn/uploads/2018/12/30/anh-background-dep-nhat_110341130.jpg);
+}
+</style>
   {% load static %}
  
   <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -20,11 +27,12 @@
   </div>
 
 
+
   <!-- ############################################### Card ################################ -->
 
   <h2 style="padding-left: 7% ; padding-top:2%;font-family: 'Verdana';"> Trending Song</h2>
   <div class="row" style="padding-top: 2%; padding-left: 4%;">
-  {% for i in song %}
+  {% for i in song_trending %}
   
     <div class="card" style="width: 18rem;padding-left: 2%;">
       <img src="{{i.image.url}}" class="card-img-top" alt="...">
@@ -39,68 +47,36 @@
 </div>
   <hr>
 
-  <h2 style="padding-left: 7% ; padding-top:2%">Your favorite Playsit</h2>
+  <h2 style="padding-left: 7% ; padding-top:2%">Songs Today</h2>
   <div class="row" style="padding-top: 2%; padding-left: 4%;">
-    <div class="card" style="width: 18rem;">
-      <img src="{% static 'musicbeats/logo.jpg'%}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Listen</a>
-      </div>
-    </div>
+    {%for i in song_today %}
     <div class="card" style="width: 18rem;padding-left: 2%;">
-      <img src="{% static 'musicbeats/logo.jpg'%}" class="card-img-top" alt="...">
+      <img src="{{i.image.url}}" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Listen</a>
+        <h5 class="card-title">{{ i.name }}</h5>
+        <p class="card-text">{{ i.tags}}</p>
+        <a href="songs/{{i.song_id}}" class="btn btn-outline-danger">Listen</a>
       </div>
     </div>
-    <div class="card" style="width: 18rem;padding-left: 2%;">
-      <img src="{% static 'musicbeats/logo.jpg'%}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Listen</a>
-      </div>
-    </div>
+   {% endfor %}
   </div>
 
   <hr>
 
-  <h2 style="padding-left: 7% ; padding-top:2%">Your liked song</h2>
+  <h2 style="padding-left: 7% ; padding-top:2%">Songs For You</h2>
   <div class="row" style="padding-top: 2%; padding-left: 4%;">
-    <div class="card" style="width: 18rem;">
-      <img src="{% static 'musicbeats/logo.jpg'%}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Listen</a>
-      </div>
-    </div>
+    {%for i in song_for_you %}
     <div class="card" style="width: 18rem;padding-left: 2%;">
-      <img src="{% static 'musicbeats/logo.jpg'%}" class="card-img-top" alt="...">
+      <img src="{{i.image.url}}" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Listen</a>
+        <h5 class="card-title">{{ i.name }}</h5>
+        <p class="card-text">{{ i.tags}}</p>
+        <a href="songs/{{i.song_id}}" class="btn btn-outline-danger">Listen</a>
       </div>
     </div>
-    <div class="card" style="width: 18rem;padding-left: 2%;">
-      <img src="{% static 'musicbeats/logo.jpg'%}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Listen</a>
-      </div>
-    </div>
+   {% endfor %}
+    
+   
   </div>
 
   <!-- Optional JavaScript; choose one of the two! -->
