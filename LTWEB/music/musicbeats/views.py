@@ -1,5 +1,6 @@
 from os import name
 from django.core.checks import messages
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from . models import History, Song, Song_channel,WatchLater,Channel,Category
 from django.contrib.auth.models import User
@@ -207,3 +208,8 @@ def songpost_channel(request, id):
     }
     return render(request, 'musicbeats/songpost_channel.html', context)
 
+
+def delete(request,id):
+    WatchLater.objects.filter(watch_id=id).delete()
+
+    return HttpResponseRedirect("/watchlater")

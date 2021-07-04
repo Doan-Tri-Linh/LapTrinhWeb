@@ -4,15 +4,17 @@
 {% block body%}
 
 <style type="text/css">
-
-    body{
-    background-image: url(https://advsolutions.vn/wp-content/uploads/2020/01/phong-nen-powerpoint-chuyen-nghiep-1.jpeg);
-}
+    .card {
+        background-image: url(https://advsolutions.vn/wp-content/uploads/2020/01/phong-nen-powerpoint-chuyen-nghiep-1.jpeg);
+    }
+    body {
+        background-image: url(https://advsolutions.vn/wp-content/uploads/2020/01/phong-nen-powerpoint-chuyen-nghiep-1.jpeg);
+    }
 </style>
 
-<div class="container">
+<div class="container" style="border-style: none;">
     {% for i in song %}
-    <div class="card mb-3" style="max-width: 400px; padding-top: 3%; display: inline-block; margin: 0px 30px;">
+    <div class="card mb-3" style=" border-style: none ;max-width: 400px; padding-top: 3%; display: inline-block; margin: 0px 30px;">
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="{{ i.image.url }}" class="img-fluid rounded-start" alt="...">
@@ -22,17 +24,18 @@
                     <h5 class="card-title">{{ i.name }}</h5>
                     <p class="card-text">{{ i.tags }}</p>
                     {% if user.is_authenticated %}
-                    <form action="/history/" method="POST" > {% csrf_token %}
+                    <form action="/history/" method="POST"> {% csrf_token %}
                         <input type="hidden" name="music_id" value="{{ i.song_id }}">
-                    <a href="/songs/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song </button></a>
+                        <a href="/songs/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song
+                            </button></a>
                     </form>
                     {% else %}
                     <a href="/songs/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song </button></a>
-                    {% endif  %}
+                    {% endif %}
                 </div>
             </div>
         </div>
-        
+
     </div>
     {% endfor %}
 </div>

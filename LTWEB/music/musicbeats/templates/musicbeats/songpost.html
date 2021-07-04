@@ -28,8 +28,8 @@
             <img src="{{ song.image.url }}" alt="" height="250px" width="350px">
         </div>
         <div class="col-md-6 " style="padding-top: 5%; ">
-            <h2 style="font-weight: 550;padding-top: 6%;"> Title: {{ song.name }}</h2>
-            <h4 style="font-weight: 550; padding-top:2% ;">Category: {{ song.tags }}</h2>
+            <h2 style="font-weight: 550;padding-top: 6%;"> Name: {{ song.name }}</h2>
+            <h4 style="font-weight: 550; padding-top:2% ;">Tags: {{ song.tags }}</h2>
                 <h4 style="font-weight: 550; padding-top:2% ;">Singer: {{ song.singer }}</h2>
                     <audio controls style="padding-top: 2%;">
                         <source src="{{song.song.url}}" type="audio/mp3">
