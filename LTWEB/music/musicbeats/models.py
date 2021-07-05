@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+
 # Create your models here.
 
 

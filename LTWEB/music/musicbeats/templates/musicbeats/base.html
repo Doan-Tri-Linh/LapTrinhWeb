@@ -34,18 +34,29 @@
           <a class="nav-link" href="/songs/">All Songs</a>
         </li>
 
+
+
         <li class="nav-item dropdown  active">   
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"  >
             Category
           </a>
           {% load mptt_tags %}
           
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu  show-on-click"  aria-labelledby="navbarDropdown">
             {% recursetree category %}
-            <a class="dropdown-item" href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+            <a class="dropdown-item" style="position: relative;" href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+            <div class="custom-menu">
 
-            {% endrecursetree %}
+                  {% if not node.is_leaf_node %}
+                  <ul class="list-links ">
+
+                    <li><a href="#">{{ children }}</a></li>
+                  </ul>
+                  {% endif %}
+                
+            </div>
+           {% endrecursetree %}
           
           </div>
 
