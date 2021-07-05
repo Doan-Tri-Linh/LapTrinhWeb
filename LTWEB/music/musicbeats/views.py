@@ -210,6 +210,5 @@ def songpost_channel(request, id):
 
 
 def delete(request,id):
-    WatchLater.objects.filter(watch_id=id).delete()
-
-    return HttpResponseRedirect("/watchlater")
+    WatchLater.objects.filter(video_id=id).delete()
+    return redirect("/watchlater")
