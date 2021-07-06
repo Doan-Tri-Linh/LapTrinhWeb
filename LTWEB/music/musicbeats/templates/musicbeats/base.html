@@ -12,6 +12,28 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="/media/images/soundmanagerv297a-20170601/script/soundmanager2.js"></script>
   <title>{% block title %} {% endblock %}</title>
+
+  <style>
+    .dropdown-menu li {
+      position: relative; 
+    }
+    .dropdown-menu .dropdown-submenu {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: -7px;
+    }
+    .dropdown-menu .dropdown-submenu-left {
+      right: 100%;
+      left: auto;
+    }
+    .dropdown-menu > li:hover > .dropdown-submenu {
+      display: block;
+    }
+    li {
+      list-style: none;
+    }
+  </style>
 </head>
 
 
@@ -43,23 +65,23 @@
           </a>
           {% load mptt_tags %}
           
-          <div class="dropdown-menu  show-on-click"  aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
             {% recursetree category %}
-            <a class="dropdown-item" style="position: relative;" href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
-            <div class="custom-menu">
-
-                  {% if not node.is_leaf_node %}
-                  <ul class="list-links ">
-
-                    <li><a href="#">{{ children }}</a></li>
-                  </ul>
-                  {% endif %}
-                
-            </div>
-           {% endrecursetree %}
-          
-          </div>
-
+            <li class="dropdown side-dropdown">
+							<a href="/category/{{ node.id }}/{{node.slug}}" class="dropdown-item"
+              {% if not node.is_leaf_node %}  
+                data-toggle="dropdown"
+              {% endif %}>{{ node.title }}</a>
+							<div class="dropdown-menu dropdown-submenu ">
+                {% if not node.is_leaf_node %}
+                <ul style="padding: 0;">
+                  <li ><a href="#" class="text-light dropdown-item">{{ children }}</a></li>
+                </ul>
+                {% endif %}
+							</div>
+						</li>
+           {% endrecursetree %}      
+          </ul>
         </li>
 
       </ul>
