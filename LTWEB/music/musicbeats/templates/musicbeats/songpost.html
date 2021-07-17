@@ -6,7 +6,7 @@
 <style type="text/css">
 
     body{
-    background-image: url(https://advsolutions.vn/wp-content/uploads/2020/01/phong-nen-powerpoint-chuyen-nghiep-1.jpeg);
+    background-image: url(https://indainam.com/wp-content/uploads/2017/10/mau-background-don-gian-03-1024x819.jpg);
 }
 </style>
 {% if message %}
@@ -27,10 +27,11 @@
 
             <img src="{{ song.image.url }}" alt="" height="250px" width="350px">
         </div>
-        <div class="col-md-6 " style="padding-top: 5%; ">
-            <h2 style="font-weight: 550;padding-top: 6%;"> Name: {{ song.name }}</h2>
-            <h4 style="font-weight: 550; padding-top:2% ;">Tags: {{ song.tags }}</h2>
-                <h4 style="font-weight: 550; padding-top:2% ;">Singer: {{ song.singer }}</h2>
+        <div class="col-md-6 " style="padding-top: 3%; ">
+            <h2 style="font-weight: 550;padding-top: 6%; color:palevioletred;">  {{ song.name }}</h2>
+    
+                <h4 style="font-weight: 200 ; padding-top:2% ;">{{ song.singer }}</h2>
+                    <p style=" padding-top:2% ; color: seagreen; ;">{{ song.viewer }}  Lượt Nghe</p>
                     <audio controls style="padding-top: 2%;">
                         <source src="{{song.song.url}}" type="audio/mp3">
                     </audio>

@@ -1,3 +1,4 @@
+from os import name
 from django.contrib import admin
 from django.urls import path, include
 from . import views
@@ -18,5 +19,7 @@ urlpatterns = [
     path('category/<int:id>/<slug:slug>', views.category_music, name='category_music'),
     path('song_channel/<int:id>',views.songpost_channel, name="songpost_channel"),
     path('delete/<int:id>',views.delete,name="delete"),
+    path('delete_channel/<int:id1>',views.delete_channel,name="delete_channel"),
+    path('rank/',views.rank,name="rank"),
 
 ]

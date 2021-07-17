@@ -4,8 +4,11 @@
 {% block body%}
 <style type="text/css">
 
+
     body{
-    background-image: url(https://advsolutions.vn/wp-content/uploads/2020/01/phong-nen-powerpoint-chuyen-nghiep-1.jpeg);
+    background-image: url(https://pdp.edu.vn/wp-content/uploads/2021/04/hinh-nen-powerpoint-de-thuong-2.jpg);
+
+    
 }
 </style>
 <div class="container">
@@ -20,7 +23,8 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{ i.name }}</h5>
-                    <p class="card-text">{{ i.tags }}</p>
+                    <p class="card-text"  style="color: seagreen;"  >{{ i.tags }}</p>
+                    <p class="card-text " style="color: seagreen;" >{{ i.viewer }}</p>
                     {% if user.is_authenticated %}
                     <form action="/history/" method="POST" > {% csrf_token %}
                         <input type="hidden" name="music_id" value="{{ i.song_id }}">

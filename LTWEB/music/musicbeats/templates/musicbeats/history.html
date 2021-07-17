@@ -5,16 +5,14 @@
 {% load static %}
 
 <style type="text/css">
-    .card{
-        background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20201009/pngtree-soft-purple-and-pink-watercolor-paint-background-image_402197.jpg);
-    }
+   
     body {
-      background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20201009/pngtree-soft-purple-and-pink-watercolor-paint-background-image_402197.jpg);
+      background-image: url(https://thiepnhanai.com/wp-content/uploads/2021/05/hinh-nen-powerpoint-don-gian-tinh-te-9.jpg);
     }
   </style>
 
 <h1 style="color: red; text-align: center;">History</h1>
-{% if history|length < 1 %} <h3 style="text-align: center; padding-top: 5%;">You have no Video in your Watch Later</h3>
+{% if history|length < 1 %} <h3 style="text-align: center; padding-top: 5%;">You have no Video in your History</h3>
     {% endif %}
     <div class="container">
         {% for i in history %}
@@ -25,7 +23,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ i.name }}</h5>
+                        <h5 class="card-title" style="color:palevioletred;">{{ i.name }}</h5>
                         <p class="card-text" style="color: seagreen;">{{ i.tags }}</p>
                         <a href="/songs/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song
                             </button></a>

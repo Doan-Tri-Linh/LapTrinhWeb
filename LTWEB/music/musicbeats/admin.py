@@ -5,6 +5,7 @@ from mptt.admin import DraggableMPTTAdmin
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title','parent']
+    
 
 class CategoryAdmin2(DraggableMPTTAdmin):
     mptt_indent_field = "title"
@@ -41,9 +42,15 @@ class CategoryAdmin2(DraggableMPTTAdmin):
         return instance.products_cumulative_count
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
+class SongAdmin(admin.ModelAdmin):
+    list_display = ['name', 'category', ]
+    list_filter = ['category']
+
+
 admin.site.register(Category,CategoryAdmin2)
-admin.site.register(Song),
+admin.site.register(Song,SongAdmin)
 admin.site.register(WatchLater),
 admin.site.register(History),
 admin.site.register(Channel),
 admin.site.register(Song_channel),
+

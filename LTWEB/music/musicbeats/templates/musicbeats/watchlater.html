@@ -1,9 +1,9 @@
 <style type="text/css">
     .card {
-        background-image: url(https://advsolutions.vn/wp-content/uploads/2020/01/phong-nen-powerpoint-chuyen-nghiep-1.jpeg);
+        background-image: url();
     }
     body {
-        background-image: url(https://advsolutions.vn/wp-content/uploads/2020/01/phong-nen-powerpoint-chuyen-nghiep-1.jpeg);
+        background-image: url(https://thiepnhanai.com/wp-content/uploads/2021/05/hinh-nen-powerpoint-don-gian-tinh-te-9.jpg);
     }
 </style>
 
@@ -13,8 +13,9 @@
 {% block body %}
 {% load static %}
 
+
 <h1 style="color: red; text-align: center;">Playlist</h1>
-{% if song|length < 1 %} <h3 style="text-align: center; padding-top: 5%;">You have no Video in your Watch Later</h3>
+{% if song|length < 1 %} <h3 style="text-align: center; padding-top: 5%;">You have no Video in your Playlist</h3>
     {% endif %}
     <div class="container">
         {% for i in song %}

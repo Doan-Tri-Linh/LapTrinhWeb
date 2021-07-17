@@ -40,6 +40,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ i.name }}</h5>
       <p class="card-text" style="color: seagreen;">{{ i.tags}}</p>
+      <p class="card-text" style="color: seagreen;">{{ i.viewer}} Lượt Nghe</p>
       {% if user.is_authenticated %}
       <form action="/history/" method="POST"> {% csrf_token %}
         <input type="hidden" name="music_id" value="{{ i.song_id }}">
@@ -63,6 +64,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ i.name }}</h5>
       <p class="card-text" style="color: seagreen;">{{ i.tags}}</p>
+      <p class="card-text" style="color: seagreen;">{{ i.viewer}} Lượt Nghe</p>
       <a href="songs/{{i.song_id}}" class="btn btn-outline-danger">Listen</a>
     </div>
   </div>
@@ -79,6 +81,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ i.name }}</h5>
       <p class="card-text" style="color: seagreen;">{{ i.tags}}</p>
+      <p class="card-text" style="color: seagreen;">{{ i.viewer}} Lượt Nghe</p>
       <a href="songs/{{i.song_id}}" class="btn btn-outline-danger">Listen</a>
     </div>
   </div>

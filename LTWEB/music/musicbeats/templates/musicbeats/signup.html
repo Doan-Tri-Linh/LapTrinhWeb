@@ -1,5 +1,99 @@
+<style>
+  form {
+    background-image: url('https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+  }
+
+  /*Create card */
+  .card {
+    height: 400px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .card-header h3 {
+    color: white;
+  }
+
+  .social_icon span {
+    font-size: 60px;
+    margin-left: 10px;
+    color: pink;
+  }
+
+  .social_icon span:hover {
+    color: white;
+    cursor: pointer;
+  }
+
+  .social_icon {
+    position: absolute;
+    right: 20px;
+    top: -45px;
+  }
+
+  .input-group-prepend span {
+    width: 50px;
+    background-color: pink;
+    color: black;
+    border: 0 !important;
+  }
+
+  input:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+
+  }
 
 
+
+  /* Set a style for all buttons */
+  button {
+    color: black;
+    background-color: pink;
+    width: 100px;
+    margin-left: 50px;
+    float: right;
+  }
+
+  /* Add a hover effect for buttons */
+  button:hover {
+    color: black;
+    background-color: white;
+  }
+
+  .links {
+    color: white;
+  }
+
+  .links a {
+    margin-left: 4px;
+  }
+
+
+  /* Center the avatar image inside this container */
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+
+  /* Avatar image */
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+
+  /* Add padding to containers */
+  .container {
+    height: 100%;
+    align-content: center;
+  }
+</style>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,65 +103,87 @@
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="/media/images/soundmanagerv297a-20170601/script/soundmanager2.js"></script>
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 {% load static %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">MusicBeats</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">MusicBeats</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/songs/">All Songs</a>
-        </li>
-    </div>
-    
-    </ul> 
-   
-  </nav>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/songs/">All Songs</a>
+      </li>
+  </div>
+
+  </ul>
+
+</nav>
 
 {% block body %}
-<div class="container my-4">
-  <form method="POST" action="/signup/">{% csrf_token %}
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+<form method="POST" action="/signup/">{% csrf_token %}
+  < <div class="container">
+    <div class="d-flex justify-content-center h-100">
+      <div class="card">
+        <div class="card-header">
+          <h3>Sign Up</h3>
+          <div class="d-flex justify-content-end social_icon">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-google-plus-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input type="email" class="form-control" placeholder="name@example.com" name="email">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" class="form-control" name="username" placeholder="username">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
+            </div>
+            <input type="text" class="form-control" name="firstname" placeholder="first name">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
+            </div>
+            <input type="text" class="form-control" name="lastname" placeholder="last name">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="password" class="form-control" name="pass1" placeholder="password">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <input type="password" class="form-control" name="pass2"  placeholder="Confirm password">
+          </div>
+          <div class="form-group">
+            <button type="submit">Sign up</button>
+          </div>
+        </div>
       </div>
-
-      <div class="form-group">
-          <label for="exampleFormControlInput1">Username</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" name="username">
-        </div>
-      
-        <div class="form-group">
-          <label for="exampleFormControlInput1">First Name</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" name="firstname">
-        </div>
-
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Last Name</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" name="lastname">
-        </div>
-
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Password</label>
-          <input type="password" class="form-control" id="exampleFormControlInput1" name="pass1">
-        </div>
-      
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Password (again)</label>
-          <input type="password" class="form-control" id="exampleFormControlInput1" name="pass2">
-        </div>
-        <div style="padding-top: 2%;">
-        <button type="submit" class="btn btn-primary">SignUp</button>
-      </div>
-    </form>
-  </div>
+    </div>
+    </div>
+</form>
 
 {% endblock %}

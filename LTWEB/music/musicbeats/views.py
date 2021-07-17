@@ -13,7 +13,7 @@ from django.http import HttpResponse
 
 def index(request):
     category = Category.objects.all()
-    song_trending = Song.objects.all().order_by('song_id')[:4]
+    song_trending = Song.objects.all().order_by('-viewer')[:4]
     song_today = Song.objects.all().order_by('-song_id')[:4]
     song_for_you = Song.objects.all().order_by('?')[:4]
     context = {
@@ -28,6 +28,7 @@ def index(request):
 def songs(request):
     category = Category.objects.all()
     song = Song.objects.all()
+   
     context = {
         'song': song,
         'category': category
@@ -39,6 +40,8 @@ def songs(request):
 def songpost(request, id):
     category = Category.objects.all()
     song = Song.objects.filter(song_id=id).first()
+    song.viewer = song.viewer + 1  
+    song.save()
     context = {
         'song': song,
         'category':category,
@@ -190,6 +193,7 @@ def category_music(request,id,slug):
 
     category = Category.objects.all()
     song = Song.objects.filter(category_id =id)
+ 
    
     context = {
         'song':song,
@@ -212,3 +216,20 @@ def songpost_channel(request, id):
 def delete(request,id):
     WatchLater.objects.filter(video_id=id).delete()
     return redirect("/watchlater")
+
+def delete_channel(request,id1):
+    Song_channel.objects.filter(song_id=id1).delete()
+    return redirect("/channel")
+
+
+def rank(request):
+    category = Category.objects.all()
+    song = Song.objects.all().order_by('-viewer')
+   
+    context = {
+        'song': song,
+        'category': category
+    }
+
+    return render(request,'musicbeats/rank.html',context)
+

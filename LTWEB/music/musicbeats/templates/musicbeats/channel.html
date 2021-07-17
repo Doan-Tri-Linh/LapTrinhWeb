@@ -5,7 +5,7 @@
     <style type="text/css">
 
         body{
-        background-image: url(https://advsolutions.vn/wp-content/uploads/2020/01/phong-nen-powerpoint-chuyen-nghiep-1.jpeg);
+        background-image: url(https://tenovi.net/public/upload/images/2017/11/30/thay-ao-desktop-voi-bo-137-anh-nen-don-gian-va-ngo-nghinh_2_18.png);
     }
     </style>
   
@@ -23,7 +23,27 @@
   </head>
 
 
-
+  <nav class="navbar navbar-expand-lg navbar-dark  bg-dark"  >
+    <a class="navbar-brand" href="/">MusicBeats</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" >
+          <a class="nav-link" href="/"> Trang Chủ <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/songs/">Bài Hát</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/rank/">Bảng Xếp Hạng</a>
+        </li>
+        </ul>
+        </div>
+   </nav>
 
 {% block body %}
     <h2 style="text-align: center; padding-top: 2; color: red ;"> Channel: {{ channel.name }} </h2>
@@ -31,7 +51,8 @@
 <body>
 <div class="container">
 
-
+    {% if song_channel|length < 1 %} <h3 style="text-align: center; padding-top: 5%;">Bạn Chưa thêm bài hát nào !!!</h3>
+    {% endif %}
     {% for i in song_channel  %}
     <div class="card mb-3" style="max-width: 540px; padding-top: 3%;">
         <div class="row g-0">
@@ -43,6 +64,9 @@
                     <h5 class="card-title">{{ i.name }}</h5>
                         <input type="hidden" name="music_id" value="{{ i.song_id }}">
                     <a href="/song_channel/{{ i.song_id }}"><button class="btn btn-outline-danger">Listen Song </button></a>
+                </button></a>
+                <a href="/delete_channel/{{ i.song_id }}"><button class="btn btn-outline-danger">Delete
+                </button></a>
                    
         
             </div>
